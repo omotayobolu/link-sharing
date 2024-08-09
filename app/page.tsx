@@ -1,7 +1,9 @@
+import Navbar from "@/components/Navbar";
+
 export default function Home() {
   return (
     <main className="">
-      <h2>Link Sharing App</h2>
+      <Navbar />
     </main>
   );
 }

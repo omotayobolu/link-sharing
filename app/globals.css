@@ -6,7 +6,12 @@
   * {
     padding: 0;
     margin: 0;
+    outline: none;
     box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-light-grey;
   }
 
   h2 {
@@ -19,5 +24,13 @@
 
   span {
     @apply text-xs font-light leading-[150%] text-dark-grey;
+  }
+
+  .flexrow {
+    @apply flex flex-row;
+  }
+
+  .flexcol {
+    @apply flex flex-col;
   }
 }
