@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  h2 {
+    @apply md:text-[2rem] text-base leading-[150%] font-bold text-dark-grey;
+  }
+
+  p {
+    @apply text-base font-normal leading-[150%] text-dark-grey;
+  }
+
+  span {
+    @apply text-xs font-light leading-[150%] text-dark-grey;
+  }
+}
