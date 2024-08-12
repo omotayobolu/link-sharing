@@ -5,7 +5,7 @@ import "./globals.css";
 const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Link SHaring App",
+  title: "Link Sharing App",
   description: "Compile your links, and share.",
 };
 
