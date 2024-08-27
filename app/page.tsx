@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import SecondaryButton from "@/components/SecondaryButton";
 import AddNewLink from "@/public/assets/add new link image.svg";
 import PrimaryButton from "@/components/PrimaryButton";
+import ShowLinks from "@/components/ShowLinks";
 
 export default function Home() {
   return (
@@ -11,9 +12,7 @@ export default function Home() {
       <Navbar />
       <div className="lg:mx-[1.67%] md:mx-[3.125%] mx-[4.3%]">
         <div className="w-full flex flex-row items-start space-x-4 space-y-0">
-          <div className="lg:w-[40%] lg:block hidden bg-white border border-transparent rounded-xl">
-            links
-          </div>
+          <ShowLinks />
           <div className="lg:w-[60%] w-full bg-white border border-transparent rounded-xl">
             <div className="p-10">
               <h2>Customize your links</h2>
@@ -46,7 +45,7 @@ export default function Home() {
                 handleClick={() => {}}
                 className=""
                 type="submit"
-                disabled=""
+                disabled={false}
               >
                 Save
               </PrimaryButton>

@@ -18,6 +18,9 @@ const config: Config = {
         white: "#FFFFFF",
         red: "#FF3939",
       },
+      boxShadow: {
+        input: "0 0 32px 0 rgba(99, 60, 255, 25%)"
+      }
     },
   },
   plugins: [],

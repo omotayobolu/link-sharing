@@ -8,7 +8,6 @@ import SecondaryButton from "./SecondaryButton";
 
 const Navbar = () => {
   const pathname = usePathname();
-  console.log(pathname);
 
   return (
     <nav className="md:my-6 lg:mx-[2%] md:mx-[3.125%]">
@@ -47,7 +46,7 @@ const Navbar = () => {
             className={`flexrow items-center space-x-2  py-[11px] px-[27px] ${
               pathname === "/profile"
                 ? "bg-light-purple border border-transparent rounded-lg"
-                : ""
+                : "hover:text-primary-purple"
             }`}
           >
             <Icon

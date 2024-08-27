@@ -10,7 +10,7 @@ type ButtonPropType = {
 const SecondaryButton = (props: ButtonPropType) => {
   return (
     <button
-      className={`font-semibold text-base border border-primary-purple rounded-lg text-primary-purple bg-white px-[27px] py-[11px] ${props.className}`}
+      className={`font-semibold text-base border border-primary-purple rounded-lg text-primary-purple bg-white px-[27px] py-[11px] hover:bg-light-purple ${props.className}`}
       onClick={props.handleClick}
       type={props.type}
     >
