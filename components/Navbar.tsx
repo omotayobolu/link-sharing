@@ -18,9 +18,9 @@ const Navbar = () => {
         </div>
         <div className="flexrow items-center sm:space-x-4">
           <Link
-            href="/"
+            href="/links"
             className={`flexrow items-center space-x-2 py-[11px] px-[27px] ${
-              pathname === "/"
+              pathname === "/links"
                 ? "bg-light-purple border border-transparent rounded-lg"
                 : ""
             }`}
@@ -30,12 +30,12 @@ const Navbar = () => {
               width="1.25rem"
               height="1.25rem"
               className={`${
-                pathname === "/" ? "text-primary-purple" : "text-grey"
+                pathname === "/links" ? "text-primary-purple" : "text-grey"
               } `}
             />
             <p
               className={`font-semibold ${
-                pathname === "/" ? "text-primary-purple" : "text-grey"
+                pathname === "/links" ? "text-primary-purple" : "text-grey"
               } sm:block hidden`}
             >
               Links

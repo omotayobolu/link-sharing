@@ -11,7 +11,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 interface ProfileDetails {
   firstName: string;
   lastName: string;
-  email: string;
+  email: string | undefined;
+  profilePicture: string | undefined;
 }
 
 const Profile = () => {
@@ -19,9 +20,9 @@ const Profile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ProfileDetails>();
+    setValue,
+  } = useForm<ProfileDetails>({ mode: "onTouched" });
 
-  // submit details
   const onsubmit: SubmitHandler<ProfileDetails> = (data) => console.log(data);
 
   const [imageSrc, setImageSrc] = useState<string>("");
@@ -29,7 +30,10 @@ const Profile = () => {
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setImageSrc(URL.createObjectURL(event.target.files[0]));
-      console.log(URL.createObjectURL(event.target.files[0]));
+      setValue(
+        "profilePicture",
+        URL.createObjectURL(event.target.files[0]).split("blob:")[1]
+      );
     }
   };
 
@@ -131,7 +135,7 @@ const Profile = () => {
                         } rounded-lg bg-white py-3 px-4  w-full`}
                         placeholder="e.g. John"
                       />
-                      {errors.firstName?.type === "required" && (
+                      {errors.firstName && (
                         <span className="text-xs text-red absolute top-1/2 right-4 -translate-y-1/2">
                           Can&apos;t be empty
                         </span>
@@ -152,7 +156,7 @@ const Profile = () => {
                         }  rounded-lg bg-white py-3 px-4  w-full`}
                         placeholder="e.g. AppleSeed"
                       />
-                      {errors.firstName?.type === "required" && (
+                      {errors.lastName && (
                         <span className="text-xs text-red absolute top-1/2 right-4 -translate-y-1/2">
                           Can&apos;t be empty
                         </span>
