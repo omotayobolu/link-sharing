@@ -17,10 +17,11 @@ const config: Config = {
         "light-grey": "#FAFAFA",
         white: "#FFFFFF",
         red: "#FF3939",
+        border: "#D9D9D9",
       },
       boxShadow: {
-        input: "0 0 32px 0 rgba(99, 60, 255, 25%)"
-      }
+        input: "0 0 32px 0 rgba(99, 60, 255, 25%)",
+      },
     },
   },
   plugins: [],
