@@ -217,7 +217,7 @@ const config = {
   },
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String   @id @default(uuid())\n  email    String   @unique\n  password String\n  profile  Profile?\n\n  accounts Account[]\n  sessions Session[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Profile {\n  id        String @id\n  firstName String\n  lastName  String\n  email     String\n\n  userId String @unique\n  user   User   @relation(fields: [userId], references: [id])\n\n  links Link[]\n}\n\nmodel Link {\n  id       Int    @id @default(autoincrement())\n  platform String\n  link     String\n\n  profileId String\n  profile   Profile @relation(fields: [profileId], references: [id])\n}\n\nmodel Account {\n  userId            String\n  type              String\n  provider          String\n  providerAccountId String\n  refresh_token     String?\n  access_token      String?\n  expires_at        Int?\n  token_type        String?\n  scope             String?\n  id_token          String?\n  session_state     String?\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@id([provider, providerAccountId])\n}\n\nmodel Session {\n  sessionToken String   @unique\n  userId       String\n  expires      DateTime\n  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel VerificationToken {\n  identifier String\n  token      String\n  expires    DateTime\n\n  @@id([identifier, token])\n}\n",
   "inlineSchemaHash": "9cac8783c6398b9cc2790eef09402f4eb046dac712b85d5e6acdd37c27c392c5",
-  "copyEngine": true
+  "copyEngine": false
 }
 
 const fs = require('fs')
@@ -254,9 +254,3 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
-// file annotations for bundling tools to include these files
-path.join(__dirname, "query_engine-windows.dll.node");
-path.join(process.cwd(), "app/generated/prisma/query_engine-windows.dll.node")
-// file annotations for bundling tools to include these files
-path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "app/generated/prisma/schema.prisma")
