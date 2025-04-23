@@ -7,25 +7,36 @@ export function saltAndHashPassword(password: string) {
 }
 
 export async function getUserFromDB(email: string, password: string) {
-  const user = await prisma.user.findUnique({
-    where: { email },
-  });
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
-  if (!user) return null;
+    if (!user) {
+      throw new Error(
+        "Invalid login details. Please check your email address and password."
+      );
+    }
 
-  const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
 
-  if (!isPasswordValid) {
-    throw new Error("Invalid credentials.");
+    if (!isPasswordValid) {
+      throw new Error("Invalid credentials.");
+    }
+
+    return user;
+  } catch (error) {
+    console.error("DB error:", error);
+    throw error;
   }
-
-  return user;
 }
 
 export async function createUser(email: string, password: string) {
   const existingUser = await prisma.user.findUnique({ where: { email } });
   if (existingUser) {
-    throw new Error("This email already exists");
+    throw new Error(
+      "This email address already exists. Log in or use a different email"
+    );
   }
 
   return await prisma.user.create({
