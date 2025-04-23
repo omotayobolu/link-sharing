@@ -1,4 +1,4 @@
-import { object, string, z } from "zod";
+import { object, string } from "zod";
 
 export const createAccountSchema = object({
   email: string({ required_error: "Email is required" })
@@ -21,4 +21,15 @@ export const createAccountSchema = object({
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords do not match!",
   path: ["confirmPassword"],
+});
+
+export const loginSchema = object({
+  email: string({ required_error: "Email is required" })
+    .min(1, "Email is required")
+    .email("Invalid email")
+    .trim(),
+  password: string({ required_error: "Password is required" }).min(
+    1,
+    "Password is required"
+  ),
 });
