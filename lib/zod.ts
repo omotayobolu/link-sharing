@@ -28,8 +28,7 @@ export const loginSchema = object({
     .min(1, "Email is required")
     .email("Invalid email")
     .trim(),
-  password: string({ required_error: "Password is required" }).min(
-    1,
-    "Password is required"
-  ),
+  password: string({ required_error: "Password is required" })
+    .min(1, "Password is required")
+    .trim(),
 });
