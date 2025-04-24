@@ -1,12 +1,20 @@
 "use client";
+
 import Navbar from "@/components/Navbar";
 import PrimaryButton from "@/components/PrimaryButton";
 import SecondaryButton from "@/components/SecondaryButton";
 import Image from "next/image";
 import ShowLinks from "@/components/ShowLinks";
 import AddNewLink from "@/public/assets/add new link image.svg";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 const Links = () => {
+  const { data: session, status } = useSession();
+
+  if (status === "unauthenticated") {
+    redirect("/login");
+  }
   return (
     <main className="">
       <Navbar />

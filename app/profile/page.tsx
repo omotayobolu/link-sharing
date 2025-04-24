@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
 import PrimaryButton from "@/components/PrimaryButton";
 import ShowLinks from "@/components/ShowLinks";
@@ -7,6 +7,8 @@ import PhImage from "@/public/assets/ph_image.svg";
 import PhImageWhite from "@/public/assets/ph_image_white.svg";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 interface ProfileDetails {
   firstName: string;
@@ -16,6 +18,14 @@ interface ProfileDetails {
 }
 
 const Profile = () => {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      redirect("/login");
+    }
+  }, [status]);
+
   const {
     register,
     handleSubmit,
@@ -114,6 +124,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="bg-light-grey p-5">
+                {session?.user?.email}
                 <form
                   onSubmit={handleSubmit(onsubmit)}
                   className="flex flex-col space-y-3"
@@ -177,8 +188,7 @@ const Profile = () => {
                 </form>
               </div>
             </div>
-            <hr />
-            <div className="py-6 pr-10 text-right">
+            <div className="py-6 pr-10 text-right border-t border-border">
               <PrimaryButton
                 handleClick={handleSubmit(onsubmit)}
                 className=""

@@ -3,8 +3,20 @@
 import LogoIcon from "@/public/assets/logo-icon.svg";
 import Image from "next/image";
 import LoginForm from "../ui/login-form";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 const Login = () => {
+  const { status } = useSession();
+  console.log(status);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      redirect("/profile");
+    }
+  }, [status]);
+
   return (
     <div className="bg-light-grey h-screen flex flex-col justify-center items-center">
       <div className="flex flex-row items-center gap-[7.5px]">

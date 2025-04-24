@@ -1,13 +1,23 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Home() {
-  const router = useRouter();
+  const { status } = useSession();
+  console.log(status);
 
   useEffect(() => {
-    router.replace("/links");
-  }, [router]);
+    if (status === "unauthenticated") {
+      redirect("/login");
+    } else {
+      redirect("/profile");
+    }
+  }, [status]);
 
-  return null;
+  if (status === "loading") {
+    return <div className="text-center">Loading...</div>;
+  }
+
+  return <div className="text-center">Redirecting</div>;
 }
