@@ -16,6 +16,7 @@ async function main() {
           firstName: "John",
           lastName: "Doe",
           email: "johndoe@example.com",
+          image: "test.png",
           links: {
             create: [
               {

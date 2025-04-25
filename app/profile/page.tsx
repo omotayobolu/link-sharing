@@ -8,23 +8,26 @@ import PhImageWhite from "@/public/assets/ph_image_white.svg";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "sonner";
 
 interface ProfileDetails {
   firstName: string;
   lastName: string;
   email: string | undefined;
-  profilePicture: string | undefined;
+  image: string | undefined;
 }
 
 const Profile = () => {
-  const { data: session, status } = useSession();
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
+  const router = useRouter();
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
       redirect("/login");
-    }
-  }, [status]);
+    },
+  });
+  const [isSaving, setIsSaving] = useState(false);
 
   const {
     register,
@@ -33,7 +36,24 @@ const Profile = () => {
     setValue,
   } = useForm<ProfileDetails>({ mode: "onTouched" });
 
-  const onsubmit: SubmitHandler<ProfileDetails> = (data) => console.log(data);
+  const onsubmit: SubmitHandler<ProfileDetails> = async (data) => {
+    console.log(data.email);
+    try {
+      setIsSaving(true);
+      const response = await axios.post("/api/create-profile", {
+        email: data.email,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        image: data.image,
+      });
+      console.log(response);
+      router.push("/links");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const [imageSrc, setImageSrc] = useState<string>("");
 
@@ -41,7 +61,7 @@ const Profile = () => {
     if (event.target.files && event.target.files[0]) {
       setImageSrc(URL.createObjectURL(event.target.files[0]));
       setValue(
-        "profilePicture",
+        "image",
         URL.createObjectURL(event.target.files[0]).split("blob:")[1]
       );
     }
@@ -124,15 +144,12 @@ const Profile = () => {
                 </div>
               </div>
               <div className="bg-light-grey p-5">
-                {session?.user?.email}
                 <form
                   onSubmit={handleSubmit(onsubmit)}
                   className="flex flex-col space-y-3"
                 >
                   <div className="flexrow items-center justify-between">
-                    <label htmlFor="firstName" className="">
-                      First Name*
-                    </label>
+                    <label className="text-grey">First Name*</label>
                     <div className="w-[65%] relative">
                       <input
                         type="text"
@@ -154,7 +171,7 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="flexrow items-center justify-between">
-                    <label htmlFor="">Last Name*</label>
+                    <label className="text-grey">Last Name*</label>
                     <div className="w-[65%] relative">
                       <input
                         type="text"
@@ -175,13 +192,15 @@ const Profile = () => {
                     </div>
                   </div>
                   <div className="flexrow items-center justify-between">
-                    <label htmlFor="">Email</label>
+                    <label className="text-grey">Email</label>
                     <div className="w-[65%]">
                       <input
                         type="email"
                         {...register("email")}
+                        defaultValue={session?.user?.email ?? ""}
                         className="border border-[#D9D9D9] rounded-lg bg-white py-3 px-4 focus:border-primary-purple focus:shadow-input w-full"
                         placeholder="email@example.com"
+                        readOnly
                       />
                     </div>
                   </div>
@@ -193,9 +212,9 @@ const Profile = () => {
                 handleClick={handleSubmit(onsubmit)}
                 className=""
                 type="submit"
-                disabled={false}
+                disabled={isSaving}
               >
-                Save
+                {isSaving ? "Saving..." : "Save"}
               </PrimaryButton>
             </div>
           </div>

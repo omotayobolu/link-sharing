@@ -46,3 +46,27 @@ export async function createUser(email: string, password: string) {
     },
   });
 }
+
+export async function createProfile(
+  email: string,
+  firstName: string,
+  lastName: string,
+  image: string
+) {
+  const user = await prisma.user.findUnique({ where: { email } });
+
+  if (!user) {
+    throw new Error("You are not authorized to create a profile");
+  }
+
+  return await prisma.profile.create({
+    data: {
+      id: `profile_${user.id}`,
+      userId: user.id,
+      firstName: firstName,
+      lastName: lastName,
+      email: user.email,
+      image: image,
+    },
+  });
+}
