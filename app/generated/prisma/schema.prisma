@@ -41,7 +41,7 @@ model Profile {
 
 model Link {
   id       Int    @id @default(autoincrement())
-  platform String
+  platform Json
   link     String
 
   profileId String

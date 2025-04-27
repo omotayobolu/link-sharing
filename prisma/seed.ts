@@ -12,7 +12,7 @@ async function main() {
       password: passwordHash,
       profile: {
         create: {
-          id: "profile-john-doe",
+          id: "profile_john-doe",
           firstName: "John",
           lastName: "Doe",
           email: "johndoe@example.com",
@@ -20,15 +20,15 @@ async function main() {
           links: {
             create: [
               {
-                platform: "GitHub",
+                platform: { id: "github", value: "GitHub", icon: "github.svg" },
                 link: "https://github.com/johndoe",
               },
               {
-                platform: "Twitter",
+                platform: { id: "github", value: "GitHub", icon: "github.svg" },
                 link: "https://twitter.com/johndoe",
               },
               {
-                platform: "LinkedIn",
+                platform: { id: "github", value: "GitHub", icon: "github.svg" },
                 link: "https://linkedin.com/in/johndoe",
               },
             ],

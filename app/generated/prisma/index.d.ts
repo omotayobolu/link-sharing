@@ -3419,14 +3419,12 @@ export namespace Prisma {
 
   export type LinkMinAggregateOutputType = {
     id: number | null
-    platform: string | null
     link: string | null
     profileId: string | null
   }
 
   export type LinkMaxAggregateOutputType = {
     id: number | null
-    platform: string | null
     link: string | null
     profileId: string | null
   }
@@ -3450,14 +3448,12 @@ export namespace Prisma {
 
   export type LinkMinAggregateInputType = {
     id?: true
-    platform?: true
     link?: true
     profileId?: true
   }
 
   export type LinkMaxAggregateInputType = {
     id?: true
-    platform?: true
     link?: true
     profileId?: true
   }
@@ -3558,7 +3554,7 @@ export namespace Prisma {
 
   export type LinkGroupByOutputType = {
     id: number
-    platform: string
+    platform: JsonValue
     link: string
     profileId: string
     _count: LinkCountAggregateOutputType | null
@@ -3631,7 +3627,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      platform: string
+      platform: Prisma.JsonValue
       link: string
       profileId: string
     }, ExtArgs["result"]["link"]>
@@ -4059,7 +4055,7 @@ export namespace Prisma {
    */
   interface LinkFieldRefs {
     readonly id: FieldRef<"Link", 'Int'>
-    readonly platform: FieldRef<"Link", 'String'>
+    readonly platform: FieldRef<"Link", 'Json'>
     readonly link: FieldRef<"Link", 'String'>
     readonly profileId: FieldRef<"Link", 'String'>
   }
@@ -5600,6 +5596,13 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -5614,6 +5617,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -5660,6 +5672,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -5806,7 +5832,7 @@ export namespace Prisma {
     OR?: LinkWhereInput[]
     NOT?: LinkWhereInput | LinkWhereInput[]
     id?: IntFilter<"Link"> | number
-    platform?: StringFilter<"Link"> | string
+    platform?: JsonFilter<"Link">
     link?: StringFilter<"Link"> | string
     profileId?: StringFilter<"Link"> | string
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
@@ -5825,7 +5851,7 @@ export namespace Prisma {
     AND?: LinkWhereInput | LinkWhereInput[]
     OR?: LinkWhereInput[]
     NOT?: LinkWhereInput | LinkWhereInput[]
-    platform?: StringFilter<"Link"> | string
+    platform?: JsonFilter<"Link">
     link?: StringFilter<"Link"> | string
     profileId?: StringFilter<"Link"> | string
     profile?: XOR<ProfileScalarRelationFilter, ProfileWhereInput>
@@ -5848,7 +5874,7 @@ export namespace Prisma {
     OR?: LinkScalarWhereWithAggregatesInput[]
     NOT?: LinkScalarWhereWithAggregatesInput | LinkScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Link"> | number
-    platform?: StringWithAggregatesFilter<"Link"> | string
+    platform?: JsonWithAggregatesFilter<"Link">
     link?: StringWithAggregatesFilter<"Link"> | string
     profileId?: StringWithAggregatesFilter<"Link"> | string
   }
@@ -6039,46 +6065,46 @@ export namespace Prisma {
   }
 
   export type LinkCreateInput = {
-    platform: string
+    platform: JsonNullValueInput | InputJsonValue
     link: string
     profile: ProfileCreateNestedOneWithoutLinksInput
   }
 
   export type LinkUncheckedCreateInput = {
     id?: number
-    platform: string
+    platform: JsonNullValueInput | InputJsonValue
     link: string
     profileId: string
   }
 
   export type LinkUpdateInput = {
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
     profile?: ProfileUpdateOneRequiredWithoutLinksNestedInput
   }
 
   export type LinkUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkCreateManyInput = {
     id?: number
-    platform: string
+    platform: JsonNullValueInput | InputJsonValue
     link: string
     profileId: string
   }
 
   export type LinkUpdateManyMutationInput = {
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
     profileId?: StringFieldUpdateOperationsInput | string
   }
@@ -6325,6 +6351,29 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type ProfileScalarRelationFilter = {
     is?: ProfileWhereInput
@@ -6344,14 +6393,12 @@ export namespace Prisma {
 
   export type LinkMaxOrderByAggregateInput = {
     id?: SortOrder
-    platform?: SortOrder
     link?: SortOrder
     profileId?: SortOrder
   }
 
   export type LinkMinOrderByAggregateInput = {
     id?: SortOrder
-    platform?: SortOrder
     link?: SortOrder
     profileId?: SortOrder
   }
@@ -6374,6 +6421,32 @@ export namespace Prisma {
     _sum?: NestedIntFilter<$PrismaModel>
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -6713,6 +6786,29 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type ProfileCreateWithoutUserInput = {
     id: string
@@ -6841,13 +6937,13 @@ export namespace Prisma {
   }
 
   export type LinkCreateWithoutProfileInput = {
-    platform: string
+    platform: JsonNullValueInput | InputJsonValue
     link: string
   }
 
   export type LinkUncheckedCreateWithoutProfileInput = {
     id?: number
-    platform: string
+    platform: JsonNullValueInput | InputJsonValue
     link: string
   }
 
@@ -6911,7 +7007,7 @@ export namespace Prisma {
     OR?: LinkScalarWhereInput[]
     NOT?: LinkScalarWhereInput | LinkScalarWhereInput[]
     id?: IntFilter<"Link"> | number
-    platform?: StringFilter<"Link"> | string
+    platform?: JsonFilter<"Link">
     link?: StringFilter<"Link"> | string
     profileId?: StringFilter<"Link"> | string
   }
@@ -7050,24 +7146,24 @@ export namespace Prisma {
 
   export type LinkCreateManyProfileInput = {
     id?: number
-    platform: string
+    platform: JsonNullValueInput | InputJsonValue
     link: string
   }
 
   export type LinkUpdateWithoutProfileInput = {
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkUncheckedUpdateWithoutProfileInput = {
     id?: IntFieldUpdateOperationsInput | number
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
   }
 
   export type LinkUncheckedUpdateManyWithoutProfileInput = {
     id?: IntFieldUpdateOperationsInput | number
-    platform?: StringFieldUpdateOperationsInput | string
+    platform?: JsonNullValueInput | InputJsonValue
     link?: StringFieldUpdateOperationsInput | string
   }
 
