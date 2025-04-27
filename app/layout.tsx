@@ -3,6 +3,7 @@ import { Instrument_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
 import AuthProvider from "./auth-provider";
+import { QueryProvider } from "./query-provider";
 
 const instrumentSans = Instrument_Sans({ subsets: ["latin"] });
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={instrumentSans.className}>
-        <AuthProvider>
-          <Toaster position="top-right" richColors duration={2000} />
-          {children}
-        </AuthProvider>
+        <QueryProvider>
+          <AuthProvider>
+            <Toaster position="top-right" richColors duration={2000} />
+            {children}
+          </AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );
