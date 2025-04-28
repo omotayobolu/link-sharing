@@ -39,7 +39,7 @@ const Preview = () => {
 
   const colors = ["bg-primary-black", "bg-primary-red", "bg-primary-blue"];
 
-  if (profileLoading || linksLoading) {
+  if (profileLoading || linksLoading || !profile) {
     return (
       <div className="flex items-center justify-center h-screen w-full bg-white">
         <p className="text-lg text-dark-grey">Loading...</p>
