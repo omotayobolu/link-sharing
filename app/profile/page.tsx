@@ -44,9 +44,10 @@ const Profile = () => {
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
-        image: data.image,
+        image: imageSrc,
       });
       console.log(response);
+      toast.success(response.data.message);
       router.push("/links");
     } catch (error) {
       console.error(error);
@@ -56,14 +57,65 @@ const Profile = () => {
   };
 
   const [imageSrc, setImageSrc] = useState<string>("");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      setImageSrc(URL.createObjectURL(event.target.files[0]));
-      setValue(
-        "image",
-        URL.createObjectURL(event.target.files[0]).split("blob:")[1]
+  const handleImageUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    // if (event.target.files && event.target.files[0]) {
+    //   setImageSrc(URL.createObjectURL(event.target.files[0]));
+    //   setValue(
+    //     "image",
+    //     URL.createObjectURL(event.target.files[0]).split("blob:")[1]
+    //   );
+    // }
+    if (!event.target.files) return;
+    const file = event.target.files[0];
+
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (e.target && typeof e.target.result === "string") {
+        setImageSrc(e.target.result);
+      }
+    };
+    reader.readAsDataURL(file);
+
+    try {
+      setIsUploading(true);
+      setUploadError(null);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "next_app_uploads");
+
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
       );
+
+      if (!response.ok) {
+        console.error("Upload failed:", response);
+        throw new Error("Failed to upload image");
+      }
+
+      const data = await response.json();
+      console.log("Cloudinary response:", data);
+
+      setImageSrc(data.secure_url);
+
+      return data.secure_url;
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setUploadError((error as any)?.message || "Failed to upload image");
+      return null;
+    } finally {
+      setIsUploading(false);
     }
   };
 
