@@ -8,7 +8,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProtectedLayout from "../protected";
 import { toast } from "sonner";
 
@@ -39,13 +39,17 @@ const Preview = () => {
 
   const colors = ["bg-primary-black", "bg-primary-red", "bg-primary-blue"];
 
-  if (profileLoading || linksLoading || !profile) {
-    return (
-      <div className="flex items-center justify-center h-screen w-full bg-white">
-        <p className="text-lg text-dark-grey">Loading...</p>
-      </div>
-    );
-  }
+  useEffect(() => {
+    if (!profileLoading && !profile) {
+      router.push("/profile");
+    }
+  }, [profileLoading, profile, router]);
+
+  useEffect(() => {
+    if (!linksLoading && !links) {
+      router.push("/links");
+    }
+  }, [linksLoading, links, router]);
 
   return (
     <ProtectedLayout>
@@ -87,7 +91,7 @@ const Preview = () => {
               className="rounded-full border-4 border-primary-purple"
             />
             <div className="mt-6 flexcol items-center gap-2">
-              <p className="text-3xl text-dark-grey font-bold">
+              <p className="text-3xl text-dark-grey font-bold text-center">
                 {profile.firstName} {profile.lastName}
               </p>
               <p className="text-base text-grey">{profile.email}</p>

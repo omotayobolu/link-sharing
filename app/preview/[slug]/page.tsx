@@ -91,7 +91,7 @@ const SharePreview = () => {
             className="rounded-full border-4 border-primary-purple"
           />
           <div className="mt-6 flexcol items-center gap-2">
-            <p className="text-3xl text-dark-grey font-bold">
+            <p className="text-3xl text-dark-grey font-bold text-center">
               {profile.firstName} {profile.lastName}
             </p>
             <p className="text-base text-grey">{profile.email}</p>
