@@ -54,81 +54,89 @@ const Preview = () => {
   return (
     <ProtectedLayout>
       <div className="min-h-screen w-full relative bg-white m-0">
-        <div className="h-[357px] w-full hidden lg:block absolute top-0 left-0 bg-primary-purple rounded-b-4xl"></div>
-        <div className="lg:fixed relative z-10 top-0 left-0 right-0 p-6 max-w-[1700px] mx-auto">
-          <div className="lg:py-4 lg:px-6 bg-white rounded-xl w-full flexrow items-center justify-between">
-            <SecondaryButton
-              handleClick={() => {
-                router.push("/links");
-              }}
-              type="button"
-              className="cursor-pointer"
-            >
-              Back to Editor
-            </SecondaryButton>
-            {shareableUrl && (
-              <PrimaryButton
-                handleClick={() => {
-                  copyUrlToClipboard();
-                }}
-                type="button"
-                className="cursor-pointer"
-                disabled={false}
-              >
-                {isCopied ? "Copied!" : "Share Link"}
-              </PrimaryButton>
-            )}
+        {profileLoading || linksLoading ? (
+          <div className="w-full h-screen flex items-center justify-center">
+            <p>Loading...</p>
           </div>
-        </div>
-        <div className="lg:h-[250px]"></div>
-        <div className="relative flex justify-center items-center">
-          <div className="w-[349px] max-w-full rounded-3xl lg:bg-light-grey py-12 px-14 flexcol items-center justify-center">
-            <Image
-              src={profile.image}
-              alt="Profile Image"
-              width={96}
-              height={96}
-              className="rounded-full border-4 border-primary-purple"
-            />
-            <div className="mt-6 flexcol items-center gap-2">
-              <p className="text-3xl text-dark-grey font-bold text-center">
-                {profile.firstName} {profile.lastName}
-              </p>
-              <p className="text-base text-grey">{profile.email}</p>
-            </div>
-            <div className="mt-14 flexcol gap-5">
-              {links.map((link: any, index: number) => (
-                <Link href={link.link} target="_blank" key={link.id}>
-                  <button
-                    className={`${
-                      colors[index % colors.length]
-                    } w-[237px] h-14 px-4.5 rounded-lg cursor-pointer hover:opacity-80`}
+        ) : (
+          <>
+            <div className="h-[357px] w-full hidden lg:block absolute top-0 left-0 bg-primary-purple rounded-b-4xl"></div>
+            <div className="lg:fixed relative z-10 top-0 left-0 right-0 p-6 max-w-[1700px] mx-auto">
+              <div className="lg:py-4 lg:px-6 bg-white rounded-xl w-full flexrow items-center justify-between">
+                <SecondaryButton
+                  handleClick={() => {
+                    router.push("/links");
+                  }}
+                  type="button"
+                  className="cursor-pointer"
+                >
+                  Back to Editor
+                </SecondaryButton>
+                {shareableUrl && (
+                  <PrimaryButton
+                    handleClick={() => {
+                      copyUrlToClipboard();
+                    }}
+                    type="button"
+                    className="cursor-pointer"
+                    disabled={false}
                   >
-                    <div className="flexrow justify-between items-center">
-                      <div className="flexrow items-center gap-2">
-                        <Icon
-                          icon={link.platform.icon}
-                          width="20px"
-                          height="20px"
-                          className="text-white"
-                        />
-                        <p className="text-base text-white">
-                          {link.platform.value}
-                        </p>
-                      </div>
-                      <Icon
-                        icon="tdesign:arrow-right"
-                        width="16px"
-                        height="16px"
-                        className="text-white"
-                      />
-                    </div>
-                  </button>
-                </Link>
-              ))}
+                    {isCopied ? "Copied!" : "Share Link"}
+                  </PrimaryButton>
+                )}
+              </div>
             </div>
-          </div>
-        </div>
+            <div className="lg:h-[250px]"></div>
+            <div className="relative flex justify-center items-center">
+              <div className="w-[349px] max-w-full rounded-3xl lg:bg-light-grey py-12 px-14 flexcol items-center justify-center">
+                <Image
+                  src={profile.image}
+                  alt="Profile Image"
+                  width={96}
+                  height={96}
+                  className="rounded-full border-4 border-primary-purple"
+                />
+                <div className="mt-6 flexcol items-center gap-2">
+                  <p className="text-3xl text-dark-grey font-bold text-center">
+                    {profile.firstName} {profile.lastName}
+                  </p>
+                  <p className="text-base text-grey">{profile.email}</p>
+                </div>
+                <div className="mt-14 flexcol gap-5">
+                  {links.map((link: any, index: number) => (
+                    <Link href={link.link} target="_blank" key={link.id}>
+                      <button
+                        className={`${
+                          colors[index % colors.length]
+                        } w-[237px] h-14 px-4.5 rounded-lg cursor-pointer hover:opacity-80`}
+                      >
+                        <div className="flexrow justify-between items-center">
+                          <div className="flexrow items-center gap-2">
+                            <Icon
+                              icon={link.platform.icon}
+                              width="20px"
+                              height="20px"
+                              className="text-white"
+                            />
+                            <p className="text-base text-white">
+                              {link.platform.value}
+                            </p>
+                          </div>
+                          <Icon
+                            icon="tdesign:arrow-right"
+                            width="16px"
+                            height="16px"
+                            className="text-white"
+                          />
+                        </div>
+                      </button>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </ProtectedLayout>
   );
