@@ -13,10 +13,12 @@ const Navbar = () => {
   return (
     <nav className="md:my-6 lg:mx-[2%] md:mx-[3.125%]">
       <div className="py-4 px-6 border border-transparent rounded-xl bg-white flexrow items-center justify-between">
-        <div className="flexrow items-center gap-1.5">
-          <Image src={LogoIcon} alt="Logo Icon" width={32} height={32} />
-          <h2 className="sm:block hidden">devlinks</h2>
-        </div>
+        <Link href="/">
+          <div className="flexrow items-center gap-1.5">
+            <Image src={LogoIcon} alt="Logo Icon" width={32} height={32} />
+            <h2 className="sm:block hidden">devlinks</h2>
+          </div>
+        </Link>
         <div className="flexrow items-center sm:gap-4">
           <Link
             href="/links"
