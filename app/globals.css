@@ -1,11 +1,24 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-primary-purple: #633cff;
+  --color-secondary-purple: #beadff;
+  --color-light-purple: #efebff;
+  --color-dark-grey: #333333;
+  --color-grey: #737373;
+  --color-light-grey: #fafafa;
+  --color-white: #ffffff;
+  --color-red: #ff3939;
+  --color-border: #d9d9d9;
+  --color-default: #eeeeee;
+  --color-primary-black: #1a1a1a;
+  --color-primary-red: #ee3939;
+  --color-primary-blue: #2d68ff;
+  --shadow-input: 0 0 32px 0 rgba(99, 60, 255, 25%);
+}
 
 @layer base {
   * {
-    padding: 0;
-    margin: 0;
     outline: none;
     box-sizing: border-box;
   }
