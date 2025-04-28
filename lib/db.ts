@@ -1,6 +1,11 @@
 import bcrypt from "bcryptjs";
 import prisma from "@/lib/prisma";
 
+type LinkInput = {
+  platform: string;
+  link: string;
+};
+
 export function saltAndHashPassword(password: string) {
   const salt = bcrypt.genSaltSync(10);
   return bcrypt.hashSync(password, salt);
@@ -69,4 +74,31 @@ export async function createProfile(
       image: image,
     },
   });
+}
+
+export async function addLinks(
+  userId: string,
+  profileId: string,
+  links: LinkInput[]
+) {
+  if (!userId) return { message: "You are not authorized to add links" };
+
+  const formattedLinks = links.map(
+    (link: { platform: string; link: string }) => ({
+      profileId: profileId,
+      platform: link.platform,
+      link: link.link,
+    })
+  );
+
+  await prisma.link.createMany({
+    data: formattedLinks,
+    skipDuplicates: true,
+  });
+
+  const newlyAddedLinks = await prisma.link.findMany({
+    where: { profileId: profileId },
+  });
+
+  return newlyAddedLinks;
 }
