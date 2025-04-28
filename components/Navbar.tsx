@@ -77,7 +77,9 @@ const Navbar = () => {
           Preview
         </SecondaryButton>
         <SecondaryButton
-          handleClick={() => {}}
+          handleClick={() => {
+            router.push("/preview");
+          }}
           type="button"
           className="sm:hidden block px-4 py-[11px]"
         >

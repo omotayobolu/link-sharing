@@ -24,9 +24,10 @@ const showlinks = () => {
 
   return (
     <div className="lg:w-[40%] lg:flex items-center justify-center hidden bg-white border border-transparent rounded-xl h-[834px]">
-      <div className="w-[307px] h-[631px] border border-grey rounded-[4rem] py-2.5 px-[11px]">
-        <div className="w-[285px] h-[611px] overflow-y-auto border border-grey rounded-[3.4rem] flex flex-col items-center justify-center pb-10">
-          <div className="mt-14">
+      <div className="relative w-[307px] h-[631px] border border-grey rounded-[4rem] py-2.5 px-[11px]">
+        <div className="w-[285px] h-[611px] scrollbar-hide overflow-y-auto border border-grey rounded-[3.4rem] flex flex-col items-center justify-center pb-10">
+          <div className="absolute top-2.5 left-1/4 right-1/4 w-1/2 h-6 border-t-0 border border-grey bg-white rounded-b-2xl"></div>
+          <div className="mt-24">
             {profile && !profileLoading ? (
               <Image
                 src={profile.image}

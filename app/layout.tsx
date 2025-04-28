@@ -19,7 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={instrumentSans.className}>
+      <body
+        className={`${instrumentSans.className} w-full max-w-[1700px] mx-auto`}
+      >
         <QueryProvider>
           <AuthProvider>
             <Toaster position="top-right" richColors duration={2000} />

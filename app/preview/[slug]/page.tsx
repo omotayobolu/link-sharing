@@ -55,9 +55,10 @@ const SharePreview = () => {
 
   return (
     <div className="min-h-screen w-full relative bg-white m-0">
-      <div className="h-[357px] w-full absolute top-0 left-0 bg-primary-purple rounded-b-4xl"></div>
-      <div className="fixed z-10 top-0 left-0 right-0 p-6">
-        <div className="py-4 px-6 bg-white rounded-xl w-full flexrow items-center justify-between">
+      <div className="h-[357px] w-full hidden lg:block absolute top-0 left-0 bg-primary-purple rounded-b-4xl"></div>
+      <div className="lg:fixed relative z-10 top-0 left-0 right-0 p-6 max-w-[1700px] mx-auto">
+        <div className="lg:py-4 lg:px-6 bg-white rounded-xl w-full flexrow items-center justify-between">
+          {" "}
           {/* <SecondaryButton
             handleClick={() => {
               router.push("/links");
@@ -79,9 +80,9 @@ const SharePreview = () => {
           </PrimaryButton>
         </div>
       </div>
-      <div className="h-[250px]"></div>
+      <div className="lg:h-[250px]"></div>
       <div className="relative flex justify-center items-center">
-        <div className="w-[349px] rounded-3xl bg-light-grey py-12 px-14 flexcol items-center justify-center">
+        <div className="w-[349px] max-w-full rounded-3xl lg:bg-light-grey py-12 px-14 flexcol items-center justify-center">
           <Image
             src={profile.image}
             alt="Profile Image"
