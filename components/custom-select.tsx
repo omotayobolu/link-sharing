@@ -2,16 +2,16 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { useState, useRef, useEffect, forwardRef } from "react";
 import { Controller, Control } from "react-hook-form";
 
-interface Option {
+export type Option = {
   id: string;
   value: string;
   icon: string;
-}
+};
 
 interface CustomSelectProps {
   options: Option[];
-  value: string;
-  onChange: (value: string) => void;
+  value: Option;
+  onChange: (value: Option) => void;
   placeholder?: string;
   className?: string;
   name?: string;
@@ -24,7 +24,7 @@ const SelectBase = forwardRef<HTMLDivElement, CustomSelectProps>(
       options,
       value,
       onChange,
-      placeholder = "Select an platform",
+      placeholder = "Select a platform",
       className = "",
       error,
     },
@@ -43,7 +43,7 @@ const SelectBase = forwardRef<HTMLDivElement, CustomSelectProps>(
       }
     }, [ref]);
 
-    const selectedOption = options.find((option) => option.value === value);
+    const selectedOption = value;
 
     useEffect(() => {
       function handleClickOutside(event: MouseEvent) {
@@ -61,8 +61,9 @@ const SelectBase = forwardRef<HTMLDivElement, CustomSelectProps>(
       };
     }, []);
 
-    const handleSelectOption = (optionValue: string) => {
-      onChange(optionValue);
+    const handleSelectOption = (option: Option) => {
+      console.log(option);
+      onChange(option);
       setIsOpen(false);
     };
 
@@ -78,16 +79,25 @@ const SelectBase = forwardRef<HTMLDivElement, CustomSelectProps>(
           <span
             className={`block text-base ${
               !selectedOption ? "text-dark-grey" : ""
-            }`}
+            } ${error ? "text-red" : ""}`}
           >
-            {selectedOption ? selectedOption.value : placeholder}
+            {selectedOption.value !== "" ? selectedOption.value : placeholder}
           </span>
-          <Icon
-            icon="ph:link-bold"
-            width="16px"
-            height="16px"
-            className="text-grey absolute top-1/2 left-4 translate-y-[-50%]"
-          />
+          {selectedOption.value !== "" ? (
+            <Icon
+              icon={selectedOption.icon}
+              width="16px"
+              height="16px"
+              className="text-grey absolute top-1/2 left-4 translate-y-[-50%]"
+            />
+          ) : (
+            <Icon
+              icon="ph:link-bold"
+              width="16px"
+              height="16px"
+              className="text-grey absolute top-1/2 left-4 translate-y-[-50%]"
+            />
+          )}
           <div className="ml-2">
             <Icon
               icon="iconoir:nav-arrow-down"
@@ -109,11 +119,11 @@ const SelectBase = forwardRef<HTMLDivElement, CustomSelectProps>(
                   <li
                     key={option.value}
                     className={`py-3 flexrow items-center gap-3 cursor-pointer text-dark-grey hover:text-primary-purple border-b border-border ${
-                      option.value === value
+                      option.value === selectedOption.value
                         ? " text-primary-purple font-medium"
                         : ""
                     }`}
-                    onClick={() => handleSelectOption(option.value)}
+                    onClick={() => handleSelectOption(option)}
                   >
                     <Icon icon={option.icon} width="16" height="16" />
                     <p className="text-inherit">{option.value}</p>
@@ -127,7 +137,6 @@ const SelectBase = forwardRef<HTMLDivElement, CustomSelectProps>(
             </ul>
           </div>
         )}
-        {error && <p className="mt-1 text-sm text-red">{error}</p>}
       </div>
     );
   }

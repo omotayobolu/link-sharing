@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import LogoIcon from "@/public/assets/logo-icon.svg";
@@ -8,6 +8,7 @@ import SecondaryButton from "./SecondaryButton";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <nav className="md:my-6 lg:mx-[2%] md:mx-[3.125%]">
@@ -16,10 +17,10 @@ const Navbar = () => {
           <Image src={LogoIcon} alt="Logo Icon" width={32} height={32} />
           <h2 className="sm:block hidden">devlinks</h2>
         </div>
-        <div className="flexrow items-center sm:space-x-4">
+        <div className="flexrow items-center sm:gap-4">
           <Link
             href="/links"
-            className={`flexrow items-center space-x-2 py-[11px] px-[27px] ${
+            className={`flexrow items-center gap-2  py-[11px] px-[27px] ${
               pathname === "/links"
                 ? "bg-light-purple border border-transparent rounded-lg"
                 : ""
@@ -43,7 +44,7 @@ const Navbar = () => {
           </Link>
           <Link
             href="/profile"
-            className={`flexrow items-center space-x-2  py-[11px] px-[27px] ${
+            className={`flexrow items-center gap-2  py-[11px] px-[27px] ${
               pathname === "/profile"
                 ? "bg-light-purple border border-transparent rounded-lg"
                 : "hover:text-primary-purple"
@@ -67,9 +68,11 @@ const Navbar = () => {
           </Link>
         </div>
         <SecondaryButton
-          handleClick={() => {}}
+          handleClick={() => {
+            router.push("/preview");
+          }}
           type="button"
-          className="sm:block hidden"
+          className="sm:block hidden cursor-pointer"
         >
           Preview
         </SecondaryButton>

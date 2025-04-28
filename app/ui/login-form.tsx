@@ -118,7 +118,7 @@ const LoginForm = () => {
         handleClick={() => {
           // handleSubmit(onsubmit);
         }}
-        disabled={false}
+        disabled={isLoggingIn}
       >
         {isLoggingIn ? "Logging in..." : "Login"}
       </PrimaryButton>

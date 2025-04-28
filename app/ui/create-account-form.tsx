@@ -34,8 +34,8 @@ export function CreateAccountForm() {
         email: data.email,
         password: data.password,
       });
-      setIsCreating;
       console.log(response);
+      toast.success(response.statusText);
       router.push("/login");
     } catch (error) {
       console.error(error);
@@ -143,7 +143,7 @@ export function CreateAccountForm() {
         className="w-full"
         type="submit"
         handleClick={() => {}}
-        disabled={false}
+        disabled={isCreating}
       >
         {isCreating ? "Creating account..." : "Create new account"}
       </PrimaryButton>
