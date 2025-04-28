@@ -43,11 +43,31 @@ export async function POST(request: Request) {
       );
     }
 
-    const profile = await createProfile(email, firstName, lastName, image);
-    return NextResponse.json(
-      { message: "Profile created!", profile },
-      { status: 201 }
-    );
+    const user = await prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    }
+
+    const existingProfile = await prisma.profile.findUnique({
+      where: { userId: user.id },
+    });
+
+    if (existingProfile) {
+      const updatedProfile = await prisma.profile.update({
+        where: { userId: user.id },
+        data: { firstName, lastName, image },
+      });
+
+      return NextResponse.json({ message: "Profile updated", updatedProfile });
+    } else {
+      const profile = await createProfile(email, firstName, lastName, image);
+
+      return NextResponse.json(
+        { message: "Profile created!", profile },
+        { status: 201 }
+      );
+    }
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }

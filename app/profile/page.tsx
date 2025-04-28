@@ -57,8 +57,36 @@ const Profile = () => {
   };
 
   const [imageSrc, setImageSrc] = useState<string>("");
-  const [isUploading, setIsUploading] = useState(false);
-  const [uploadError, setUploadError] = useState(null);
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (!session?.user?.id) return; // Wait until session is available
+
+      try {
+        const res = await fetch(
+          `/api/create-profile?userId=${session.user.id}`
+        );
+        if (!res.ok) {
+          console.error("No existing profile found.");
+          return;
+        }
+
+        const profile = await res.json();
+        console.log("Fetched profile:", profile);
+
+        setValue("firstName", profile.firstName);
+        setValue("lastName", profile.lastName);
+        setValue("email", profile.email); // Just to be sure, even if email is readonly
+        setImageSrc(profile.image);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
+
+    if (session?.user?.id) {
+      fetchProfile();
+    }
+  }, [session, setValue]);
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -84,9 +112,6 @@ const Profile = () => {
     reader.readAsDataURL(file);
 
     try {
-      setIsUploading(true);
-      setUploadError(null);
-
       const formData = new FormData();
       formData.append("file", file);
       formData.append("upload_preset", "next_app_uploads");
@@ -112,10 +137,7 @@ const Profile = () => {
       return data.secure_url;
     } catch (error) {
       console.error("Error uploading image:", error);
-      setUploadError((error as any)?.message || "Failed to upload image");
       return null;
-    } finally {
-      setIsUploading(false);
     }
   };
 
