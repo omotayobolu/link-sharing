@@ -8,7 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const showlinks = () => {
+const Showlinks = () => {
   const { data: session } = useSession();
   const { data: links, isLoading: linksLoading } = getLinks(session?.user?.id);
   const { data: profile, isLoading: profileLoading } = getProfile(
@@ -112,4 +112,4 @@ const showlinks = () => {
   );
 };
 
-export default showlinks;
+export default Showlinks;
