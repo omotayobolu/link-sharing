@@ -70,28 +70,32 @@ const Preview = () => {
           <>
             <div className="h-[357px] w-full hidden lg:block absolute top-0 left-0 bg-primary-purple rounded-b-4xl"></div>
             <div className="lg:fixed relative z-10 top-0 left-0 right-0 p-6 max-w-[1700px] mx-auto">
-              <div className="lg:py-4 lg:px-6 bg-white rounded-xl w-full flexrow items-center justify-between">
-                <SecondaryButton
-                  handleClick={() => {
-                    router.push("/links");
-                  }}
-                  type="button"
-                  className="cursor-pointer"
-                >
-                  Back to Editor
-                </SecondaryButton>
-                {shareableUrl && (
-                  <PrimaryButton
+              <div className="lg:py-4 lg:px-6 bg-white rounded-xl w-full flex flex-wrap gap-4 items-center justify-between">
+                <div className="w-full sm:w-auto">
+                  <SecondaryButton
                     handleClick={() => {
-                      copyUrlToClipboard();
+                      router.push("/links");
                     }}
                     type="button"
-                    className="cursor-pointer"
-                    disabled={false}
+                    className="cursor-pointer w-full"
                   >
-                    {isCopied ? "Copied!" : "Share Link"}
-                  </PrimaryButton>
-                )}
+                    Back to Editor
+                  </SecondaryButton>
+                </div>
+                <div className="w-full sm:w-auto">
+                  {shareableUrl && (
+                    <PrimaryButton
+                      handleClick={() => {
+                        copyUrlToClipboard();
+                      }}
+                      type="button"
+                      className="cursor-pointer w-full"
+                      disabled={false}
+                    >
+                      {isCopied ? "Copied!" : "Share Link"}
+                    </PrimaryButton>
+                  )}
+                </div>
               </div>
             </div>
             <div className="lg:h-[250px]"></div>

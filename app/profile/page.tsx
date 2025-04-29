@@ -145,19 +145,19 @@ const Profile = () => {
     <div>
       <Navbar />
       <div className="lg:mx-[1.67%] md:mx-[3.125%] mx-[4.3%]">
-        <div className="w-full flexrow items-start space-x-4 space-y-0">
+        <div className="w-full flexrow items-start gap-4">
           <ShowLinks />
-          <div className="lg:w-[60%] w-full bg-white border border-transparent rounded-xl">
-            <div className="p-10">
+          <div className="lg:w-[60%] md:mt-0 mt-4 w-full bg-white border border-transparent rounded-xl">
+            <div className="md:p-10 p-6">
               <h2>Profile Details</h2>
               <p className="mt-2">
                 Add your details to create a personal touch to your profile.
               </p>
               <div className="bg-light-grey mt-10 mb-6 border border-transparent rounded-xl p-5">
-                <div className="w-full flexrow items-center justify-between">
-                  <p className="w-[35%] text-grey">Profile Picture</p>
+                <div className="w-full flex md:flex-row flex-col md:items-center justify-between">
+                  <p className="md:w-[35%] text-grey">Profile Picture</p>
 
-                  <div className="w-[65%] flexrow items-center space-x-6">
+                  <div className="w-[65%] flex md:flex-row flex-col md:items-center space-x-6">
                     <div className=" w-[193px] h-[193px]">
                       <input
                         type="file"
@@ -222,9 +222,11 @@ const Profile = () => {
                   onSubmit={handleSubmit(onsubmit)}
                   className="flex flex-col space-y-3"
                 >
-                  <div className="flexrow items-center justify-between">
-                    <label className="text-grey">First Name*</label>
-                    <div className="w-[65%] relative">
+                  <div className="flex md:flex-row flex-col md:items-center justify-between gap-1">
+                    <label className="text-grey md:text-base text-xs">
+                      First Name*
+                    </label>
+                    <div className="md:w-[65%] w-full relative">
                       <input
                         type="text"
                         {...register("firstName", { required: true })}
@@ -244,9 +246,11 @@ const Profile = () => {
                       )}
                     </div>
                   </div>
-                  <div className="flexrow items-center justify-between">
-                    <label className="text-grey">Last Name*</label>
-                    <div className="w-[65%] relative">
+                  <div className="flex md:flex-row flex-col md:items-center justify-between gap-1">
+                    <label className="text-grey md:text-base text-xs">
+                      Last Name*
+                    </label>
+                    <div className="md:w-[65%] w-full relative">
                       <input
                         type="text"
                         {...register("lastName", { required: true })}
@@ -265,9 +269,11 @@ const Profile = () => {
                       )}
                     </div>
                   </div>
-                  <div className="flexrow items-center justify-between">
-                    <label className="text-grey">Email</label>
-                    <div className="w-[65%]">
+                  <div className="flex md:flex-row flex-col md:items-center justify-between gap-1">
+                    <label className="text-grey md:text-base text-xs">
+                      Email
+                    </label>
+                    <div className="md:w-[65%] w-full">
                       <input
                         type="email"
                         {...register("email")}

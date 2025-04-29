@@ -123,7 +123,7 @@ const LoginForm = () => {
         {isLoggingIn ? "Logging in..." : "Login"}
       </PrimaryButton>
       <div className="">
-        <p className="text-grey text-center">
+        <p className="text-grey text-center flex flex-wrap  items-center justify-center gap-1">
           Don&apos;t have an account?
           <Link href="/create-account">
             <span className="text-base text-primary-purple">

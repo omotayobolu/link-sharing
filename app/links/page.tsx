@@ -189,7 +189,7 @@ const Links = () => {
         <div className="w-full flex flex-row items-start space-x-4 space-y-0">
           <ShowLinks />
           <div className="lg:w-[60%] w-full bg-white border border-transparent rounded-xl">
-            <div className="p-10">
+            <div className="md:p-10 p-6">
               <h2>Customize your links</h2>
               <p className="mt-2">
                 Add/edit/remove links below and then share all your profiles

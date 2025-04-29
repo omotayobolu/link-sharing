@@ -28,7 +28,7 @@
   }
 
   h2 {
-    @apply md:text-[2rem] text-base leading-[150%] font-bold text-dark-grey;
+    @apply md:text-[2rem] text-2xl  leading-[150%] font-bold text-dark-grey;
   }
 
   p {

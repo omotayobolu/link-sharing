@@ -12,17 +12,23 @@ const Navbar = () => {
 
   return (
     <nav className="md:my-6 lg:mx-[2%] md:mx-[3.125%]">
-      <div className="py-4 px-6 border border-transparent rounded-xl bg-white flexrow items-center justify-between">
+      <div className="py-4 px-6 border border-transparent rounded-xl bg-white flexrow items-center justify-between gap-2">
         <Link href="/">
           <div className="flexrow items-center gap-1.5">
-            <Image src={LogoIcon} alt="Logo Icon" width={32} height={32} />
+            <Image
+              src={LogoIcon}
+              alt="Logo Icon"
+              width={32}
+              height={32}
+              className="flex-shrink-0"
+            />
             <h2 className="sm:block hidden">devlinks</h2>
           </div>
         </Link>
         <div className="flexrow items-center sm:gap-4">
           <Link
             href="/links"
-            className={`flexrow items-center gap-2  py-[11px] px-[27px] ${
+            className={`flexrow items-center gap-2  md:py-[11px] py-2 md:px-[27px] px-5 ${
               pathname === "/links"
                 ? "bg-light-purple border border-transparent rounded-lg"
                 : ""
@@ -46,7 +52,7 @@ const Navbar = () => {
           </Link>
           <Link
             href="/profile"
-            className={`flexrow items-center gap-2  py-[11px] px-[27px] ${
+            className={`flexrow items-center gap-2  md:py-[11px] py-2 md:px-[27px] px-5 ${
               pathname === "/profile"
                 ? "bg-light-purple border border-transparent rounded-lg"
                 : "hover:text-primary-purple"
@@ -78,15 +84,15 @@ const Navbar = () => {
         >
           Preview
         </SecondaryButton>
-        <SecondaryButton
-          handleClick={() => {
+        <button
+          onClick={() => {
             router.push("/preview");
           }}
           type="button"
-          className="sm:hidden block px-4 py-[11px]"
+          className="sm:hidden block md:px-4 md:py-[11px] p-2 border border-primary-purple rounded-lg text-primary-purple"
         >
           <Icon icon="ph:eye-bold" width="1.25rem" height="1.25rem" />
-        </SecondaryButton>
+        </button>
       </div>
     </nav>
   );
