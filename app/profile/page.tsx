@@ -158,7 +158,7 @@ const Profile = () => {
                   <p className="md:w-[35%] text-grey">Profile Picture</p>
 
                   <div className="w-[65%] flex md:flex-row flex-col md:items-center gap-3">
-                    <div className=" w-[193px] h-[193px]">
+                    <div className="w-[193px] h-[193px]">
                       <input
                         type="file"
                         id="profile-image"
@@ -168,21 +168,21 @@ const Profile = () => {
                       />
                       <label
                         htmlFor="profile-image"
-                        className={`flex justify-center items-center w-full ${
+                        className={`flex justify-center items-center w-full h-full cursor-pointer border border-transparent rounded-xl ${
                           imageSrc === "" && "bg-light-purple"
-                        }  h-full cursor-pointer border border-transparent rounded-xl`}
+                        }`}
                       >
                         {imageSrc !== "" ? (
-                          <div className="relative">
+                          <div className="relative w-full h-full overflow-hidden rounded-xl">
                             <Image
                               src={imageSrc}
                               alt="profile-image"
                               width={193}
                               height={193}
-                              className="max-w-full h-full border border-transparent rounded-xl"
+                              className="object-cover w-full h-full"
                             />
-                            <div className="absolute top-0 left-0 bg-[rgba(0,0,0,0.5)] opacity-0 hover:opacity-100 z-10 border border-transparent rounded-xl w-full h-full flex justify-center items-center">
-                              <div className="flexcol justify-center items-center space-y-2">
+                            <div className="absolute top-0 left-0 bg-[rgba(0,0,0,0.5)] opacity-0 hover:opacity-100 z-10 w-full h-full flex justify-center items-center rounded-xl">
+                              <div className="flex flex-col justify-center items-center space-y-2">
                                 <Image
                                   src={PhImageWhite}
                                   alt=""
@@ -196,7 +196,7 @@ const Profile = () => {
                             </div>
                           </div>
                         ) : (
-                          <div className="flexcol justify-center items-center space-y-2">
+                          <div className="flex flex-col justify-center items-center space-y-2">
                             <Image
                               src={PhImage}
                               alt=""
@@ -210,7 +210,7 @@ const Profile = () => {
                         )}
                       </label>
                     </div>
-                    <span className="text-xs text-grey  ">
+                    <span className="text-xs text-grey">
                       Image must be below 1024x1024px.
                       <br /> Use PNG or JPG format.
                     </span>
