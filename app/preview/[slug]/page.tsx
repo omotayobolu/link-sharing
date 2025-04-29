@@ -83,13 +83,13 @@ const SharePreview = () => {
       <div className="lg:h-[250px]"></div>
       <div className="relative flex justify-center items-center">
         <div className="w-[349px] max-w-full rounded-3xl lg:bg-light-grey py-12 px-14 flexcol items-center justify-center">
-          <div className="relative w-[96px] h-[96px]">
+          <div className="relative w-[104px] h-[104px]">
             <Image
               src={profile.image}
               alt="Profile Image"
-              width={96}
-              height={96}
-              className="rounded-full w-[96px] h-[96px] object-cover border-4 border-primary-purple flex-shrink-0"
+              width={104}
+              height={104}
+              className="rounded-full w-[104px] h-[104px] object-cover border-4 border-primary-purple flex-shrink-0"
             />
           </div>
           <div className="mt-6 flexcol items-center gap-2">

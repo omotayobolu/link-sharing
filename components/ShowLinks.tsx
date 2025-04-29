@@ -29,13 +29,13 @@ const Showlinks = () => {
           <div className="absolute top-2.5 left-1/4 right-1/4 w-1/2 h-6 border-t-0 border border-grey bg-white rounded-b-2xl"></div>
           <div className="mt-24">
             {profile && !profileLoading ? (
-              <div className="relative w-[96px] h-[96px]">
+              <div className="relative w-[104px] h-[104px]">
                 <Image
                   src={profile.image}
                   alt="Profile Image"
-                  width={96}
-                  height={96}
-                  className="rounded-full w-[96px] h-[96px] object-cover border-4 border-primary-purple flex-shrink-0"
+                  width={104}
+                  height={104}
+                  className="rounded-full w-[104px] h-[104px] object-cover border-4 border-primary-purple flex-shrink-0"
                 />
               </div>
             ) : (
