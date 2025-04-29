@@ -89,7 +89,7 @@ export function CreateAccountForm() {
           <input
             type="password"
             id="password"
-            placeholder="At least 8 characters"
+            placeholder="At least 6 characters"
             {...register("password")}
             className={`border ${
               errors?.password
@@ -118,7 +118,7 @@ export function CreateAccountForm() {
           <input
             type="password"
             id="confirmPassword"
-            placeholder="At least 8 characters"
+            placeholder="At least 6 characters"
             {...register("confirmPassword")}
             className={`border ${
               errors?.confirmPassword

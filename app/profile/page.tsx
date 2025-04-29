@@ -154,10 +154,10 @@ const Profile = () => {
                 Add your details to create a personal touch to your profile.
               </p>
               <div className="bg-light-grey mt-10 mb-6 border border-transparent rounded-xl p-5">
-                <div className="w-full flex md:flex-row flex-col md:items-center justify-between">
+                <div className="w-full flex md:flex-row flex-col gap-4 md:items-center justify-between">
                   <p className="md:w-[35%] text-grey">Profile Picture</p>
 
-                  <div className="w-[65%] flex md:flex-row flex-col md:items-center space-x-6">
+                  <div className="w-[65%] flex md:flex-row flex-col md:items-center gap-3">
                     <div className=" w-[193px] h-[193px]">
                       <input
                         type="file"
